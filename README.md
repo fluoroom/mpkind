@@ -51,7 +51,7 @@ sudo cp ./mpkind.service /etc/systemd/system/mpkind.service
 ```bash
 npm run buildstall
 ```
-[see package.json](/blob/main/package.json)
+[see package.json](/package.json)
 
 5. Start the server:
 ```bash
