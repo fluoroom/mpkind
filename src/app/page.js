@@ -37,17 +37,19 @@ export default async function Home({ searchParams: rawSearchParams }) {
     },
     coverArt: {
       width: '100%',
-      aspectRatio: '1/1',
+      paddingBottom: '100%',
       backgroundColor: '#f3f4f6',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
+      position: 'relative',
+      textAlign: 'center',
+      overflow: 'hidden'
     },
     coverImage: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      aspectRatio: '1/1'
     },
     controls: {
       display: 'flex',

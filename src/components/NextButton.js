@@ -2,7 +2,7 @@ export function NextButton() {
 
   const styles = {
     button: {
-      backgroundColor:'#ffffff',
+      backgroundColor: '#ffffff',
       border: '1px solid #111',
       borderRadius: '50%',
       width: '48px',
@@ -11,15 +11,16 @@ export function NextButton() {
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-      padding: 0,
+      padding: '12px',
       textDecoration: 'none',
+      boxSizing: 'border-box'
     },
     svg: {
-      width: '24px',
-      height: '24px',
+      width: '100%',
+      height: '100%',
       stroke: '#111',
       strokeWidth: '2',
-      transition: 'stroke 0.2s ease'
+      objectFit: 'cover'
     }
   };
 
@@ -36,6 +37,7 @@ export function NextButton() {
         strokeWidth={2}
         stroke="currentColor"
         style={styles.svg}
+        preserveAspectRatio="xMidYMid meet"
       >
         <path
           strokeLinecap="round"

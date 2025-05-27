@@ -13,7 +13,6 @@ export function PreviousButton() {
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-      padding: 0,
       textDecoration: 'none'
     },
     svg: {
