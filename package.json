@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "sudo systemctl stop mpkind && next dev -p 8600",
-    "build": "next build && sudo systemctl restart mpkind",
+    "build": "next build",
+    "buildstall": "next build && sudo systemctl restart mpkind",
     "start": "next start -p 8600",
     "lint": "next lint"
   },
