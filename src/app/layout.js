@@ -19,7 +19,6 @@ export default function RootLayout({ children }) {
         margin: 0,
         padding: 0,
         width: '100%',
-        maxWidth: '632px',
         overflowX: 'hidden',  
         overflowY: 'scroll',
         boxSizing: 'border-box',
