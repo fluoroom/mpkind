@@ -15,8 +15,12 @@ const UPDATE_RATES = [
 export function UpdateRateSelector({ currentRate }) {
   const router = useRouter();
 
-  setTimeout(() => {
-  }, 5000);
+  useEffect(() => {
+    setInterval(() => {
+      router.refresh();
+    }, currentRate * 1000);
+
+  }, [currentRate, router]);
 
   const styles = {
     container: {

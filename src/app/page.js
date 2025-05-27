@@ -5,6 +5,7 @@ import { NextButton } from '@/components/NextButton';
 import { PreviousButton } from '@/components/PreviousButton';
 import { SongInfo } from '@/components/SongInfo';
 import { UpdateRateSelector } from '@/components/UpdateRateSelector';
+import { VolumeButtons } from '@/components/VolumeButtons';
 
 export const dynamic = 'force-dynamic';
 
@@ -108,6 +109,7 @@ export default async function Home({ searchParams: rawSearchParams }) {
 
         {/* Playback Controls */}
         <div style={styles.controls}>
+          <VolumeButtons />
           <div style={styles.controlsCenter}>
             <PreviousButton />
             <PlayPauseButton isPlaying={songInfo.status.state === 'play'} />

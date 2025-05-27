@@ -10,6 +10,8 @@ ExecStart=/usr/bin/npm start
 Restart=always
 Environment=NODE_ENV=production
 Environment=PORT=8600
+Environment=HTTP_USER=admin
+Environment=HTTP_PASSWORD=your_secure_password_here
 
 [Install]
 WantedBy=multi-user.target 
