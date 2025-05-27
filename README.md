@@ -46,7 +46,7 @@ npm install
 3. Edit mpkind.service to your needs and install it:
 ```bash
 sudo cp ./mpkind.service /etc/systemd/system/mpkind.service
-
+```
 4. Run the application:
 ```bash
 npm run buildstall
