@@ -42,7 +42,7 @@ cd mpkind
 2. Install dependencies:
 ```bash
 npm install
-
+```
 3. Edit mpkind.service to your needs and install it:
 ```bash
 sudo cp ./mpkind.service /etc/systemd/system/mpkind.service
