@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 8600",
-    "build": "next build",
+    "dev": "sudo systemctl stop mpkind && next dev -p 8600",
+    "build": "next build && sudo systemctl restart mpkind",
     "start": "next start -p 8600",
     "lint": "next lint"
   },
