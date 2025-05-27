@@ -42,14 +42,18 @@ cd mpkind
 2. Install dependencies:
 ```bash
 npm install
-```
 
-3. Build the application:
+3. Edit mpkind.service to your needs and install it:
 ```bash
-npm run build
-```
+sudo cp ./mpkind.service /etc/systemd/system/mpkind.service
 
-4. Start the server:
+4. Run the application:
+```bash
+npm run buildstall
+```
+(see package.json)
+
+5. Start the server:
 ```bash
 npm start
 ```
