@@ -1,6 +1,4 @@
-'use client';
 
-import { useState } from 'react';
 
 export function SongInfoOverlay({ song, searchParams }) {
   const isVisible = searchParams?.showInfo !== 'false';
