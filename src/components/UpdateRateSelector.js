@@ -16,9 +16,10 @@ export function UpdateRateSelector({ currentRate }) {
   const router = useRouter();
 
   useEffect(() => {
-    setInterval(() => {
+    let interval = setInterval(() => {
       router.refresh();
     }, currentRate * 1000);
+    return () => clearInterval(interval);
 
   }, [currentRate, router]);
 
