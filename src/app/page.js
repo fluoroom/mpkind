@@ -6,6 +6,8 @@ import { PreviousButton } from '@/components/PreviousButton';
 import { SongInfo } from '@/components/SongInfo';
 import { UpdateRateSelector } from '@/components/UpdateRateSelector';
 import { VolumeButtons } from '@/components/VolumeButtons';
+import { SongInfoOverlay } from '@/components/SongInfoOverlay';
+import { text } from 'stream/consumers';
 
 export const dynamic = 'force-dynamic';
 
@@ -52,6 +54,51 @@ export default async function Home({ searchParams: rawSearchParams }) {
       height: '100%',
       objectFit: 'cover',
     },
+    songInfoOverlay: {
+      position: 'absolute',
+      bottom: '1rem',
+      left: '1rem',
+      backgroundColor: '#ffffff',
+      padding: '0.75rem 0.75rem',
+      maxWidth: '80%',
+      zIndex: 10,
+      textAlign: 'left',
+      lineHeight: '1rem',
+      fontFamily:'monospace'
+    },
+    songInfoTitle: {
+      fontSize: '1.1rem',
+      fontWeight: '600',
+      color: '#000000',
+      margin: '0 0 0.25rem 0',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    },
+    songInfoArtist: {
+      fontSize: '0.9rem',
+      color: '#222',
+      margin: '0 0 0.25rem 0',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    },
+    songInfoAlbum: {
+      fontSize: '0.9rem',
+      color: '#000000',
+      margin: '0 0 0.25rem 0',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    },
+    songInfoYear: {
+      fontSize: '0.9rem',
+      color: '#000000',
+      margin: 0,
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    },
     controls: {
       display: 'flex',
       alignItems: 'center',
@@ -97,13 +144,16 @@ export default async function Home({ searchParams: rawSearchParams }) {
         {/* Cover Art */}
         <div style={styles.coverArt}>
           {songInfo.currentSong.file && (
-            <img
-              src={`/api/cover?file=${encodeURIComponent(songInfo.currentSong.file)}`}
-              alt="Album Cover"
-              style={styles.coverImage}
-              loading="eager"
-              fetchPriority="high"
-            />
+            <>
+              <img
+                src={`/api/cover?file=${encodeURIComponent(songInfo.currentSong.file)}`}
+                alt="Album Cover"
+                style={styles.coverImage}
+                loading="eager"
+                fetchPriority="high"
+              />
+              <SongInfoOverlay song={songInfo.currentSong} searchParams={searchParams} />
+            </>
           )}
         </div>
 
@@ -137,9 +187,6 @@ export default async function Home({ searchParams: rawSearchParams }) {
             duration={parseInt(songInfo.status.duration || '0')} 
           />
         </div>
-
-        {/* Song Info */}
-        <SongInfo song={songInfo.currentSong} />
 
         {/* Update Rate Selector */}
         <UpdateRateSelector currentRate={updateRate} />
