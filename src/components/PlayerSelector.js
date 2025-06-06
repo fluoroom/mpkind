@@ -1,6 +1,3 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
 
 const PLAYERS = [
   { value: 'mpd', label: 'MPD Player' },
@@ -8,7 +5,6 @@ const PLAYERS = [
 ];
 
 export function PlayerSelector({ currentPlayer }) {
-  const router = useRouter();
 
   const styles = {
     container: {
@@ -47,7 +43,7 @@ export function PlayerSelector({ currentPlayer }) {
           <select
             name="player"
             defaultValue={currentPlayer}
-            onChange={(e) => e.target.form.submit()}
+            onChange="(e) => e.target.form.submit()"
             style={styles.select}
           >
             {PLAYERS.map(({ value, label }) => (

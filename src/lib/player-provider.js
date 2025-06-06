@@ -16,7 +16,7 @@ export class PlayerProvider {
     throw new Error('Not implemented');
   }
 
-  async seek(position) {
+  async seek() {
     throw new Error('Not implemented');
   }
 }
@@ -185,7 +185,7 @@ export class HTTPProvider extends PlayerProvider {
     }
   }
 
-  async seek(position) {
+  async seek() {
     // Note: The HTTP API doesn't seem to have a seek endpoint in the provided routes
     // You may need to implement this if your HTTP player supports seeking
     throw new Error('Seek not supported by HTTP player');
