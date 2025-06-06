@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams: rawSearchParams }) {
   const searchParams = await Promise.resolve(rawSearchParams);
-  const updateRate = searchParams.rate ? parseInt(searchParams.rate) : 10;
+  const updateRate = searchParams.rate ? parseInt(searchParams.rate) : 5;
   const playerType = searchParams.player || 'mpd';
   const songInfo = await getCurrentSong(playerType);
   if (searchParams.position) {
@@ -25,6 +25,10 @@ export default async function Home({ searchParams: rawSearchParams }) {
       });
     }
   }
+
+  const searchParamsString = Object.entries(searchParams)
+    .map(([key, value]) => `${key}=${value}`)
+    .join('&'); 
   
   const styles = {
     main: {
@@ -166,7 +170,7 @@ export default async function Home({ searchParams: rawSearchParams }) {
             <NextButton playerType={playerType} />
           </div>
           <a
-            href="."
+            href={`/?${searchParamsString}`}
             style={styles.syncButton}
             aria-label="Reload page"
           >
