@@ -1,27 +1,38 @@
 'use server';
 
-import { getSongInfo as fetchSongInfo, togglePlayPause, nextSong, previousSong, setVolume } from '@/lib/mpd';
+import { createPlayerProvider } from '@/lib/player-provider';
 
-export async function playPause() {
-  await togglePlayPause();
-  return fetchSongInfo();
+export async function getCurrentSong(playerType = 'mpd') {
+  const provider = createPlayerProvider(playerType);
+  return provider.getStatus();
 }
 
-export async function next() {
-  await nextSong();
-  return fetchSongInfo();
+export async function playPause(playerType = 'mpd') {
+  const provider = createPlayerProvider(playerType);
+  await provider.playPause();
+  return getCurrentSong(playerType);
 }
 
-export async function previous() {
-  await previousSong();
-  return fetchSongInfo();
+export async function next(playerType = 'mpd') {
+  const provider = createPlayerProvider(playerType);
+  await provider.next();
+  return getCurrentSong(playerType);
+}
+
+export async function previous(playerType = 'mpd') {
+  const provider = createPlayerProvider(playerType);
+  await provider.previous();
+  return getCurrentSong(playerType);
+}
+
+export async function seek(position, playerType = 'mpd') {
+  const provider = createPlayerProvider(playerType);
+  await provider.seek(position);
+  return getCurrentSong(playerType);
 }
 
 export async function updateVolume(volume) {
-  await setVolume(volume);
-  return fetchSongInfo();
-}
-
-export async function getCurrentSong() {
-  return await fetchSongInfo();
+  const provider = createPlayerProvider('mpd');
+  await provider.setVolume(volume);
+  return getCurrentSong();
 } 

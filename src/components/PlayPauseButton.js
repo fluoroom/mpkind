@@ -1,6 +1,4 @@
-
-
-export function PlayPauseButton({ isPlaying }) {
+export function PlayPauseButton({ isPlaying, playerType = 'mpd' }) {
 
   
 
@@ -36,7 +34,7 @@ export function PlayPauseButton({ isPlaying }) {
 
   return (
     <a
-      href="/api/playpause"
+      href={`/api/playpause?player=${playerType}`}
       style={styles.button}
       aria-label={isPlaying ? 'Pause' : 'Play'}
     >

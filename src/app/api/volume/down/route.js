@@ -3,7 +3,7 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 
 const execAsync = promisify(exec);
-
+/* remember that volume buttons aren't part of the player, they have their own actions */
 export async function GET(request) {
   try {
     await execAsync(process.env.VOLDN_COMMAND);

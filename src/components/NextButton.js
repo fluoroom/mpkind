@@ -1,4 +1,4 @@
-export function NextButton() {
+export function NextButton({ playerType = 'mpd' }) {
 
   const styles = {
     button: {
@@ -26,7 +26,7 @@ export function NextButton() {
 
   return (
     <a
-      href="/api/next"
+      href={`/api/next?player=${playerType}`}
       style={styles.button}
       aria-label="Next track"
     >

@@ -1,6 +1,4 @@
-
-
-export function PreviousButton() {
+export function PreviousButton({ playerType = 'mpd' }) {
 
   const styles = {
     button: {
@@ -25,7 +23,7 @@ export function PreviousButton() {
 
   return (
     <a
-      href="/api/previous"
+      href={`/api/previous?player=${playerType}`}
       style={styles.button}
       aria-label="Previous track"
     >

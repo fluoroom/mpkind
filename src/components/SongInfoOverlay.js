@@ -2,6 +2,7 @@
 
 export function SongInfoOverlay({ song, searchParams }) {
   const isVisible = searchParams?.showInfo !== 'false';
+  console.log('song:', song);
 
   const styles = {
     overlay: {
@@ -54,9 +55,9 @@ export function SongInfoOverlay({ song, searchParams }) {
       style={styles.overlay}
       title="Click to toggle visibility"
     >
-      <h2 style={styles.title}>{song.title || 'Unknown Title'}</h2>
-      <p style={styles.artist}>{song.artist || 'Unknown Artist'}</p>
-      <p style={styles.album}>{song.album || 'Unknown Album'} ({song.date || ''})</p>
+      <h2 style={styles.title}>{song.title || ''}</h2>
+      <p style={styles.artist}>{song.artist || ''}</p>
+      <p style={styles.album}>{song.album || ''} {song.date ? `(${song.date})` : ''}</p>
     </a>
   );
 } 

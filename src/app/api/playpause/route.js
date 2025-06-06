@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
-import { togglePlayPause } from '@/lib/mpd';
+import { playPause } from '@/app/actions';
 
 export async function GET(request) {
   try {
-    await togglePlayPause();
+    const url = new URL(request.url);
+    const playerType = url.searchParams.get('player') || 'mpd';
+    await playPause(playerType);
     const referer = request.headers.get('referer') || '/';
     return NextResponse.redirect(referer);
   } catch (error) {

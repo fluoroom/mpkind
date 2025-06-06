@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
-import { nextSong } from '@/lib/mpd';
+import { next } from '@/app/actions';
 
 export async function GET(request) {
   try {
-    await nextSong();
+    const url = new URL(request.url);
+    const playerType = url.searchParams.get('player') || 'mpd';
+    await next(playerType);
     const referer = request.headers.get('referer') || '/';
     return NextResponse.redirect(referer);
   } catch (error) {

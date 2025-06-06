@@ -3,25 +3,26 @@ import { PlayPauseButton } from '@/components/PlayPauseButton';
 import { TimePositionControl } from '@/components/TimePositionControl';
 import { NextButton } from '@/components/NextButton';
 import { PreviousButton } from '@/components/PreviousButton';
-import { SongInfo } from '@/components/SongInfo';
 import { UpdateRateSelector } from '@/components/UpdateRateSelector';
+import { PlayerSelector } from '@/components/PlayerSelector';
 import { VolumeButtons } from '@/components/VolumeButtons';
 import { SongInfoOverlay } from '@/components/SongInfoOverlay';
-import { text } from 'stream/consumers';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ searchParams: rawSearchParams }) {
   const searchParams = await Promise.resolve(rawSearchParams);
   const updateRate = searchParams.rate ? parseInt(searchParams.rate) : 10;
-  const songInfo = await getCurrentSong();
+  const playerType = searchParams.player || 'mpd';
+  const songInfo = await getCurrentSong(playerType);
+  
   if (searchParams.position) {
     const position = parseInt(searchParams.position);
     if (!isNaN(position)) {
       await fetch('/api/seek', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ position }),
+        body: JSON.stringify({ position, playerType }),
       });
     }
   }
@@ -143,10 +144,10 @@ export default async function Home({ searchParams: rawSearchParams }) {
       <div style={styles.container}>
         {/* Cover Art */}
         <div style={styles.coverArt}>
-          {songInfo.currentSong.file && (
+          {songInfo.currentSong &&  (
             <>
               <img
-                src={`/api/cover?file=${encodeURIComponent(songInfo.currentSong.file)}`}
+                src={`/api/cover?file=${encodeURIComponent(songInfo.currentSong.file)}&player=${playerType}`}
                 alt="Album Cover"
                 style={styles.coverImage}
                 loading="eager"
@@ -161,9 +162,9 @@ export default async function Home({ searchParams: rawSearchParams }) {
         <div style={styles.controls}>
           <VolumeButtons />
           <div style={styles.controlsCenter}>
-            <PreviousButton />
-            <PlayPauseButton isPlaying={songInfo.status.state === 'play'} />
-            <NextButton />
+            <PreviousButton playerType={playerType} />
+            <PlayPauseButton isPlaying={songInfo.status.state === 'play'} playerType={playerType} />
+            <NextButton playerType={playerType} />
           </div>
           <a
             href="."
@@ -188,8 +189,11 @@ export default async function Home({ searchParams: rawSearchParams }) {
           />
         </div>
 
-        {/* Update Rate Selector */}
-        <UpdateRateSelector currentRate={updateRate} />
+        {/* Player and Update Rate Selectors */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+          <PlayerSelector currentPlayer={playerType} />
+          <UpdateRateSelector currentRate={updateRate} />
+        </div>
       </div>
     </main>
   );
