@@ -15,7 +15,6 @@ export default async function Home({ searchParams: rawSearchParams }) {
   const updateRate = searchParams.rate ? parseInt(searchParams.rate) : 10;
   const playerType = searchParams.player || 'mpd';
   const songInfo = await getCurrentSong(playerType);
-  
   if (searchParams.position) {
     const position = parseInt(searchParams.position);
     if (!isNaN(position)) {
@@ -190,9 +189,9 @@ export default async function Home({ searchParams: rawSearchParams }) {
         </div>
 
         {/* Player and Update Rate Selectors */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-          <PlayerSelector currentPlayer={playerType} />
-          <UpdateRateSelector currentRate={updateRate} />
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0rem' }}>
+          <PlayerSelector currentPlayer={playerType} searchParams={searchParams} />
+          <UpdateRateSelector currentRate={updateRate} searchParams={searchParams} />
         </div>
       </div>
     </main>

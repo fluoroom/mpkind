@@ -51,7 +51,7 @@ export function SongInfoOverlay({ song, searchParams }) {
 
   return (
     <a 
-      href={`?showInfo=${isVisible ? 'false' : 'true'}${searchParams?.rate ? `&rate=${searchParams.rate}` : ''}${searchParams?.position ? `&position=${searchParams.position}` : ''}`}
+      href={`?showInfo=${isVisible ? 'false' : 'true'}${searchParams?.rate ? `&rate=${searchParams.rate}` : ''}${searchParams?.position ? `&position=${searchParams.position}` : ''}${searchParams?.player ? `&player=${searchParams.player}` : ''}`}
       style={styles.overlay}
       title="Click to toggle visibility"
     >

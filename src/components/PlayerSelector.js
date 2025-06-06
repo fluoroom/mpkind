@@ -4,7 +4,7 @@ const PLAYERS = [
   { value: 'http', label: 'HTTP Player' },
 ];
 
-export function PlayerSelector({ currentPlayer }) {
+export function PlayerSelector({ currentPlayer, searchParams }) {
 
   const styles = {
     container: {
@@ -15,7 +15,7 @@ export function PlayerSelector({ currentPlayer }) {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: '1rem',
+      padding: '1rem .5rem',
       gap: '1rem'
     },
     selectContainer: {
@@ -25,14 +25,23 @@ export function PlayerSelector({ currentPlayer }) {
     select: {
       backgroundColor: '#ffffff',
       color: '#111827',
-      padding: '0.5rem 0.75rem',
+      padding: '0.5rem 0.5rem',
       borderRadius: '0.375rem',
       border: '1px solid #d1d5db',
-      minWidth: '200px',
-      textAlign: 'center'
+      minWidth: '150px',
+      textAlign: 'left'
     },
     form: {
       margin: 0
+    },
+    button: {
+      backgroundColor: '#ffffff',
+      color: '#111827',
+      padding: '0.375rem 0.5rem',
+      marginLeft: '0.5rem',
+      borderRadius: '0.375rem',
+      border: '1px solid #d1d5db',
+      textAlign: 'left'
     }
   };
 
@@ -43,7 +52,6 @@ export function PlayerSelector({ currentPlayer }) {
           <select
             name="player"
             defaultValue={currentPlayer}
-            onChange="(e) => e.target.form.submit()"
             style={styles.select}
           >
             {PLAYERS.map(({ value, label }) => (
@@ -52,6 +60,15 @@ export function PlayerSelector({ currentPlayer }) {
               </option>
             ))}
           </select>
+          {searchParams?.showInfo &&
+            <input type="hidden" name="showInfo" value={searchParams?.showInfo?.toString()} />
+          }
+          {searchParams?.rate &&
+            <input type="hidden" name="rate" value={searchParams?.rate?.toString()} />
+          }
+          <button type="submit" style={styles.button}>
+            Go
+          </button>
         </form>
       </div>
     </div>

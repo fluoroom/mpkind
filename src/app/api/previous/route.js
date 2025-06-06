@@ -7,6 +7,7 @@ export async function GET(request) {
     const playerType = url.searchParams.get('player') || 'mpd';
     await previous(playerType);
     const referer = request.headers.get('referer') || '/';
+    console.log(referer);
     return NextResponse.redirect(referer);
   } catch (error) {
     console.error('Error playing previous song:', error);
